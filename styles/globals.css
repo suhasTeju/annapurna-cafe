@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+header {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr;
+    padding-right: 6px !important;
+    padding-left: 6px !important;
+}
