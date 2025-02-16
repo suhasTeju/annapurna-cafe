@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Mocha & Matcha",
+  name: "Annapurna Cafe",
   description: "Billing Platform",
   navItems: [
     {

@@ -5,268 +5,182 @@ import { Navbar } from "./navbar";
 // Sample JSON data
 export const menuData = [
   {
-    category: "Breakfast & Snacks",
+    category: "Breakfast",
     items: [
       {
         id: 1,
-        name: "Bread Omelette",
-        price: 99,
-        veg: false,
+        name: "Masala Dosa",
+        price: 80,
+        veg: true,
         image:
-          "https://i0.wp.com/myvegetarianroots.com/wp-content/uploads/2019/09/DSC_0019.jpg?fit=5022%2C4000&ssl=1",
+          "https://www.cookwithmanali.com/wp-content/uploads/2020/05/Masala-Dosa-500x500.jpg",
       },
       {
         id: 2,
-        name: "Fluffy Egg",
-        price: 120,
-        veg: false,
+        name: "Idli with Sambar",
+        price: 60,
+        veg: true,
         image:
-          "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/143172.jpg?resize=1200:*",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2021/06/idli-recipe-1.jpg",
       },
       {
         id: 3,
-        name: "Crispy Potato Balls",
-        price: 99,
+        name: "Pongal",
+        price: 70,
         veg: true,
         image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGADWoquM-doxu8Tp47talb8Dl6ikVwLDomA&s",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2016/04/ven-pongal-recipe.jpg",
       },
-    ],
-  },
-  {
-    category: "Sandwiches & Ramen",
-    items: [
       {
         id: 4,
-        name: "Paneer Sandwich",
-        price: 140,
+        name: "Vada with Coconut Chutney",
+        price: 50,
         veg: true,
         image:
-          "https://www.indianhealthyrecipes.com/wp-content/uploads/2019/02/paneer-sandwich.jpg",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2021/07/medu-vada-1.jpg",
       },
       {
         id: 5,
-        name: "Veg Sandwich",
-        price: 99,
+        name: "Upma",
+        price: 60,
         veg: true,
         image:
-          "https://www.cookwithmanali.com/wp-content/uploads/2021/04/Smoked-Tandoori-Paneer-Sandwich.jpg",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2009/08/upma-recipe-1.jpg",
       },
+    ],
+  },
+  {
+    category: "Lunch",
+    items: [
       {
         id: 6,
-        name: "Corn Sandwich",
-        price: 130,
+        name: "Meals (Thali)",
+        price: 150,
         veg: true,
         image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGuj8s13vXLL0O3poEAh7JqXNiDBoVhsBUIw&s",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2014/05/maharashtrian-kadhi-recipe.jpg",
       },
       {
         id: 7,
-        name: "Paneer Ramen",
-        price: 240,
+        name: "Vegetable Biryani",
+        price: 120,
         veg: true,
         image:
-          "https://www.modernhoney.com/wp-content/uploads/2024/01/Homemade-Chicken-Ramen-1-crop-scaled.jpg",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2015/05/bombay-vegetable-biryani-recipe.jpg",
       },
       {
         id: 8,
-        name: "Mushroom Ramen",
-        price: 230,
+        name: "Curd Rice",
+        price: 70,
         veg: true,
         image:
-          "https://img-cdn.thepublive.com/fit-in/640x430/filters:format(webp)/local-samosal/media/media_files/Z7gFugbQM2rtZ6s3bMK4.png",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2016/07/curd-rice-5.jpg",
       },
       {
         id: 9,
-        name: "Plain Ramen",
-        price: 190,
+        name: "Sambar Rice",
+        price: 80,
         veg: true,
         image:
-          "https://thefoodiediaries.co/wp-content/uploads/2023/01/img_1929-e1673955074338.jpg",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2017/10/sambar-rice-recipe.jpg",
+      },
+      {
+        id: 10,
+        name: "Lemon Rice",
+        price: 70,
+        veg: true,
+        image:
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2020/12/lemon-rice-recipe-1.jpg",
       },
     ],
   },
   {
-    category: "Waffles & Pancakes",
+    category: "Snacks",
     items: [
       {
-        id: 10,
-        name: "Fruit Waffle",
-        price: 130,
-        veg: true,
-        image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhCY1xuucLPNVgpL_rXrsjVLQ_apERS9k4ZA&s",
-      },
-      {
         id: 11,
-        name: "Dark Chocolate Waffle",
-        price: 110,
+        name: "Bonda",
+        price: 50,
         veg: true,
         image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9aj8GZEYba-N91S9lsikl2GhQM-uIogsvBA&s",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2016/08/vegetable-bonda-recipe.jpg",
       },
       {
         id: 12,
-        name: "Nutella Waffle",
-        price: 130,
+        name: "Paniyaram",
+        price: 60,
         veg: true,
         image:
-          "https://www.chiselandfork.com/wp-content/uploads/2021/11/nutella-waffles-1.jpg",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2022/05/paniyaram-recipe-kuzhi-paniyaram.jpg",
       },
       {
         id: 13,
-        name: "Pancake with Maple Syrup",
-        price: 140,
+        name: "Rava Uttapam",
+        price: 80,
         veg: true,
         image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRahW6xzBaT7KDcV0C6ZCmXLi_5s6ovlKFsGw&s",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2016/01/rava-uttapam-recipe.jpg",
+      },
+      {
+        id: 14,
+        name: "Onion Pakoda",
+        price: 50,
+        veg: true,
+        image:
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2024/05/onion-pakoda-recipe-2.jpg",
+      },
+      {
+        id: 15,
+        name: "Coconut Chutney Sandwich",
+        price: 70,
+        veg: true,
+        image:
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2013/07/corn-sandwich-recipe01.jpg",
       },
     ],
   },
   {
-    category: "Boba & Specialty Drinks",
+    category: "Desserts",
     items: [
       {
-        id: 14,
-        name: "Blueberry Boba",
-        price: 140,
-        veg: true,
-        image:
-          "https://www.whiskaffair.com/wp-content/uploads/2022/09/Blueberry-Boba-Tea-2-3.jpg",
-      },
-      {
-        id: 15,
-        name: "Black Currant Boba",
-        price: 140,
-        veg: true,
-        image: "https://jtbobahouse.com/assets/images/menu/menu1.webp",
-      },
-      {
         id: 16,
-        name: "Caramel Boba",
-        price: 120,
+        name: "Payasam",
+        price: 90,
         veg: true,
         image:
-          "https://shottbeverages.com/wp-content/uploads/2020/08/salted_caramel_bubble_tea.jpg",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2017/08/sabudana-payasam-recipe.jpg",
       },
       {
         id: 17,
-        name: "Classic Cold Coffee Boba",
-        price: 99,
+        name: "Rava Kesari",
+        price: 70,
         veg: true,
         image:
-          "https://assets.epicurious.com/photos/5953ca064919e41593325d97/4:3/w_4992,h_3744,c_limit/bubble_tea_recipe_062817.jpg",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2021/06/kesari-recipe.jpg",
       },
       {
         id: 18,
-        name: "Hazelnut Coffee Boba",
-        price: 110,
+        name: "Pongal with Jaggery",
+        price: 80,
         veg: true,
         image:
-          "https://tyberrymuch.com/wp-content/uploads/2023/06/coffee-milk-tea-boba-feature.jpg",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2016/04/ven-pongal-recipe.jpg",
       },
       {
         id: 19,
-        name: "Mocha Coffee",
-        price: 160,
+        name: "Mysore Pak",
+        price: 100,
         veg: true,
         image:
-          "https://i.pinimg.com/736x/22/8b/72/228b72a03cb98c19063193cf0188a6a3.jpg",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2016/10/mysore-pak.jpg",
       },
       {
         id: 20,
-        name: "Ice Tea Boba",
-        price: 120,
+        name: "Coconut Ladoo",
+        price: 60,
         veg: true,
         image:
-          "https://bellyfull.net/wp-content/uploads/2022/04/Boba-Tea-blog-1.jpg",
-      },
-      {
-        id: 21,
-        name: "Peach Ice Tea",
-        price: 120,
-        veg: true,
-        image:
-          "https://www.thespruceeats.com/thmb/jk3sZ3Jtq2WPnd31DrB-FR1qfs0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/summer-peach-tea-cocktail-recipe-761506-hero-01-f949acc1ed22404da03ce72648412bcf.jpg",
-      },
-      {
-        id: 22,
-        name: "Matcha Tea",
-        price: 210,
-        veg: true,
-        image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNl6tgWEy1OGMB1iMyeK09_ninlzm5W_HYhg&s",
-      },
-      {
-        id: 23,
-        name: "Taro Milk Tea",
-        price: 160,
-        veg: true,
-        image:
-          "https://i.pinimg.com/736x/93/ae/2f/93ae2f187d2669042324e36564072935.jpg",
-      },
-      {
-        id: 24,
-        name: "Avocado Boba",
-        price: 190,
-        veg: true,
-        image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ9LetQN2gMo1dEQHG2M5scSSNt8UPxpYkYQ&s",
-      },
-      {
-        id: 25,
-        name: "Strawberry Boba",
-        price: 140,
-        veg: true,
-        image:
-          "https://www.inkatrinaskitchen.com/wp-content/uploads/2020/05/Strawberry-Bubble-Tea-24-wm-600.jpg",
-      },
-      {
-        id: 26,
-        name: "Mango Boba",
-        price: 120,
-        veg: true,
-        image:
-          "https://hungryinthailand.com/wp-content/uploads/2024/03/mango-bubble-tea.webp",
-      },
-      {
-        id: 27,
-        name: "Kiwi Boba",
-        price: 210,
-        veg: true,
-        image:
-          "https://i.pinimg.com/736x/2b/2b/1b/2b2b1b0d3595461f892259375f032a97.jpg",
-      },
-      {
-        id: 28,
-        name: "Dragon Fruit",
-        price: 160,
-        veg: true,
-        image:
-          "https://colorfulsuperfoodie.com/wp-content/uploads/2023/07/066A4091_adobe_express.jpeg",
-      },
-      {
-        id: 29,
-        name: "Butterfly Pea Tea",
-        price: 99,
-        veg: true,
-        image:
-          "https://www.my-foodcourt.com/wp-content/uploads/2018/04/butterfly-pea-flower-tea-2-1123x617.jpg",
-      },
-      {
-        id: 30,
-        name: "Grape Juice",
-        price: 99,
-        veg: true,
-        image:
-          "https://extremewellnesssupply.com/cdn/shop/articles/ebb198a19bdb649a3668bb0587cc15b6_880x.jpg?v=1676283077",
-      },
-      {
-        id: 31,
-        name: "Banana Dry Fruits",
-        price: 99,
-        veg: true,
-        image: "https://i.ytimg.com/vi/eXbiuJ7_z9k/hqdefault.jpg",
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2014/07/motichoor-ladoo.jpg",
       },
     ],
   },
@@ -358,8 +272,8 @@ const MenuScreen = () => {
         console.log("Reusing existing Bluetooth connection.");
       }
 
-      const storeName = "Mocha and Matcha";
-      const storeAddress = "5th Block,Koramangala,Bengaluru, Karnataka 560095";
+      const storeName = "Annapurna Cafe";
+      const storeAddress = "5th Block,Ejipura,Bengaluru, Karnataka 560095";
 
       // ESC/POS commands
       let printData = `\x1B\x40`; // Reset printer
