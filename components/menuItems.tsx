@@ -219,104 +219,112 @@ const MenuScreen = () => {
     );
   };
 
-  const calculateTotal = () => {
-    return cart.reduce(
-      (total, item: any) => total + item.price * item.quantity,
-      0
-    );
+  const calculateSubtotal = (): number => {
+    return cart.reduce((total, item: any) => total + item.price * item.quantity, 0);
   };
+  
+  const calculateTotal = (): number => {
+    const subtotal = calculateSubtotal();
+    const serviceCharge = 0; // Assuming 10% service charge
+    const cgst = subtotal * 0.025; // 2.5% CGST
+    const sgst = subtotal * 0.025; // 2.5% SGST
+    return subtotal + serviceCharge + cgst + sgst;
+  };
+  
 
   const handlePrint = async (): Promise<void> => {
     if (!("bluetooth" in navigator)) {
-      alert("Web Bluetooth API is not supported by your browser.");
-      return;
+        alert("Web Bluetooth API is not supported by your browser.");
+        return;
     }
 
     try {
-      let device: any = bluetoothDeviceRef.current;
-      let writableCharacteristic: any = writableCharacteristicRef.current;
+        let device: any = bluetoothDeviceRef.current;
+        let writableCharacteristic: any = writableCharacteristicRef.current;
 
-      // Check if the device is already paired and connected
-      if (!device || !device.gatt || !device.gatt.connected) {
-        console.log("Requesting new Bluetooth device...");
-        //@ts-ignore
-        device = await navigator.bluetooth.requestDevice({
-          acceptAllDevices: true,
-          optionalServices: ["e7810a71-73ae-499d-8c15-faa9aef0c3f2"],
+        if (!device || !device.gatt || !device.gatt.connected) {
+            console.log("Requesting new Bluetooth device...");
+            //@ts-ignore
+            device = await navigator.bluetooth.requestDevice({
+                acceptAllDevices: true,
+                optionalServices: ["e7810a71-73ae-499d-8c15-faa9aef0c3f2"],
+            });
+
+            if (!device.gatt) {
+                throw new Error("GATT server not available on this device.");
+            }
+
+            const server = await device.gatt.connect();
+            const service = await server.getPrimaryService(
+                "e7810a71-73ae-499d-8c15-faa9aef0c3f2"
+            );
+            const characteristics = await service.getCharacteristics();
+            writableCharacteristic =
+                characteristics.find(
+                    (char: any) =>
+                        char.properties.write || char.properties.writeWithoutResponse
+                ) || null;
+
+            if (!writableCharacteristic) {
+                alert("No writable characteristic found.");
+                return;
+            }
+
+            bluetoothDeviceRef.current = device;
+            writableCharacteristicRef.current = writableCharacteristic;
+        } else {
+            console.log("Reusing existing Bluetooth connection.");
+        }
+
+        const storeName = "Annapurna Cafe";
+        const storeAddress = "5th Block, Ejipura, Bengaluru, Karnataka 560095";
+        const date = new Date().toLocaleString();
+
+        let printData = "\x1B\x40"; // Reset printer
+        printData += "\x1B\x21\x30" + storeName + "\n"; // Bold store name
+        printData += "\x1B\x21\x00" + storeAddress + "\n";
+        printData += "\n"
+        printData += "Date: " + date + "\n";
+        printData += "--------------------------------\n";
+        printData += "Item                Qty  Price\n";
+        printData += "--------------------------------\n";
+
+        cart.forEach((item: any) => {
+            let itemLine = item.name.padEnd(20).substring(0, 20) +
+                item.quantity.toString().padStart(3) +
+                "  " + item.price.toFixed(2).padStart(6) + "\n";
+            printData += itemLine;
         });
+        let serviceCharge=0
 
-        if (!device.gatt) {
-          throw new Error("GATT server not available on this device.");
+        printData += "--------------------------------\n";
+        printData += "Subtotal:         Rs." + calculateSubtotal().toFixed(2) + "\n";
+        printData += "Service Charge:   Rs." + serviceCharge.toFixed(2) + "\n";
+        printData += "CGST 2.5%:        Rs." + (calculateSubtotal() * 0.025).toFixed(2) + "\n";
+        printData += "SGST 2.5%:        Rs." + (calculateSubtotal() * 0.025).toFixed(2) + "\n";
+        printData += "--------------------------------\n";
+        printData += "Total:            Rs." + calculateTotal().toFixed(2) + "\n";
+        printData += "--------------------------------\n";
+        printData += "\n\n\n\n\n"; // Space for tearing
+
+        const encoder = new TextEncoder();
+        const encodedData = encoder.encode(printData);
+        const chunkSize = 512;
+  
+        for (let i = 0; i < encodedData.length; i += chunkSize) {
+          const chunk = encodedData.slice(i, i + chunkSize);
+          await writableCharacteristic.writeValue(chunk);
+          await new Promise((resolve) => setTimeout(resolve, 50)); // Small delay to prevent overload
         }
+        console.log("Printing complete!");
 
-        const server = await device.gatt.connect();
-        const service = await server.getPrimaryService(
-          "e7810a71-73ae-499d-8c15-faa9aef0c3f2"
-        );
-        const characteristics = await service.getCharacteristics();
-        writableCharacteristic =
-          characteristics.find(
-            (char: any) =>
-              char.properties.write || char.properties.writeWithoutResponse
-          ) || null;
-
-        if (!writableCharacteristic) {
-          alert("No writable characteristic found.");
-          return;
-        }
-
-        // Save references for future prints
-        bluetoothDeviceRef.current = device;
-        writableCharacteristicRef.current = writableCharacteristic;
-      } else {
-        console.log("Reusing existing Bluetooth connection.");
-      }
-
-      const storeName = "Annapurna Cafe";
-      const storeAddress = "5th Block,Ejipura,Bengaluru, Karnataka 560095";
-
-      // ESC/POS commands
-      let printData = `\x1B\x40`; // Reset printer
-      printData += `\x1B\x21\x30`; // Bold store name
-      printData += `${storeName}\n`;
-      printData += `\x1B\x21\x00`; // Normal font for address
-      printData += `${storeAddress}\n`;
-
-      printData += "--------------------------------\n"; // Separator
-      printData += `\x1B\x21\x30Order Summary:\n`; // Bold Order Summary
-      printData += `\x1B\x21\x00`;
-      printData += "--------------------------------\n"; // Separator
-
-      // Use larger font for items and format correctly
-      cart.forEach((item: any) => {
-        printData += `\x1B\x21\x10`; // Medium font size
-        printData += `${item.name} x ${item.quantity} - Rs.${
-          item.price * item.quantity
-        }\n`; // Item name quantity & price
-        printData += `\n`;
-      });
-      printData += "--------------------------------\n"; // Separator
-      printData += `\x1B\x21\x30`; // Bold total
-      printData += `Total: Rs.${calculateTotal()}\n`;
-      printData += `\x1B\x21\x00`;
-      printData += "--------------------------------\n"; // Separator
-      printData += `\n\n\n\n\n`; // Space for tearing
-
-      // Convert to Uint8Array before writing
-      const encoder = new TextEncoder();
-      const encodedData = encoder.encode(printData);
-
-      await writableCharacteristic.writeValue(encodedData);
-
-      console.log("Printing complete!");
-
-      // Reset the cart after printing
-      setCart([]);
+        setCart([]);
     } catch (error) {
-      console.error("Error printing:", error);
-      alert("Failed to print. Please try again.");
+        console.error("Error printing:", error);
+        alert("Failed to print. Please try again.");
     }
-  };
+};
+
 
   return (
     <>
