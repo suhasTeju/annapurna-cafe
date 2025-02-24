@@ -92,6 +92,22 @@ export const menuData = [
         image:
           "https://www.vegrecipesofindia.com/wp-content/uploads/2020/12/lemon-rice-recipe-1.jpg",
       },
+      {
+        id: 10,
+        name: "Water bottle",
+        price: 6,
+        veg: true,
+        image:
+          "https://www.vegrecipesofindia.com/wp-content/uploads/2020/12/lemon-rice-recipe-1.jpg",
+      },
+      {
+        id: 10,
+        name: "Choco berry",
+        price: 120,
+        veg: true,
+        image:
+          "https://i0.wp.com/bakewithshivesh.com/wp-content/uploads/2023/12/IMG_4215-1.jpg?resize=350%2C200&ssl=1",
+      },
     ],
   },
   {
